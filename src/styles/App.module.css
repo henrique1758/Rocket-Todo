@@ -1,0 +1,80 @@
+.newTaskBox {
+    max-width: 46rem;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin-top: -1.6875rem;
+}
+
+.newTaskBox input {
+    width: 100%;
+    height: 3.375rem;
+
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--gray-500);
+    border: none;
+    outline: 0;
+    color: var(--gray-300);
+}
+
+.newTaskBox input:focus {
+    border: 1px solid var(--purple);
+}
+
+.newTaskBox button {
+    height: 3.375rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0 1.125rem;
+    color: var(--gray-100);
+    font-weight: 700;
+    background-color: var(--blue);
+    border-radius: 0.5rem;
+    outline: 0;
+}
+
+.newTaskBox button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.newTaskBox button:focus {
+    border: 1px solid var(--gray-100);
+}
+
+.tasksContainer {
+    max-width: 46rem;
+    margin: 4rem auto 0;
+}
+
+.tasksContainer header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tasksContainer header div span {
+    margin-left: 0.5rem;
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    padding: 0.125rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 12px;
+}
+
+.tasksContainer header .tasksCreated {
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 0.875rem;
+}
+
+.tasksContainer header .tasksCompleted {
+    font-weight: 700;
+    color: var(--purple);
+    font-size: 0.875rem;
+}
