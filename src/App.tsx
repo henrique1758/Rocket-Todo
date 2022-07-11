@@ -7,19 +7,18 @@ import { TasksBox } from "./components/TasksBox";
 
 import "./styles/GlobalStyles.css";
 import styles from "./styles/App.module.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 interface Task {
   id: string;
   content: string;
-  isComplete?: boolean;
+  isCompleted: boolean;
 }
 
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskContent, setTaskContent] = useState('');
-  const [isTaskCompleted, setIsTaskCompleted] = useState(false);
 
   function handleCreateTask(e: FormEvent) {
     e.preventDefault();
@@ -32,13 +31,27 @@ function App() {
     const task: Task = {
       id: uuid(),
       content: taskContent,
-      isComplete: isTaskCompleted
+      isCompleted: false
     }
 
     setTasks([...tasks, task]);
 
     setTaskContent('');
   }
+
+  function handleUpdateTaskStatus(taskId: string) {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === taskId) {
+        return { ...task, isCompleted: !task.isCompleted };
+      }
+
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  }
+
+  const completedTasksCount = tasks.filter(task => task.isCompleted === true).length;
 
   return (
     <main>
@@ -69,16 +82,15 @@ function App() {
 
           <div>
             <strong className={styles.tasksCompleted}>Concluídas</strong>
-            <span>0</span>
+            <span>{completedTasksCount}</span>
           </div>
         </header>
 
         {tasks?.length > 0 ? (
           <TasksBox 
-            tasks={tasks} 
-            isComplete={isTaskCompleted} 
-            setIsComplete={setIsTaskCompleted} 
+            tasks={tasks}
             setTasks={setTasks}
+            onUpdateTaskStatus={handleUpdateTaskStatus}
           />
           ) : (
           <TasksEmptyBox />

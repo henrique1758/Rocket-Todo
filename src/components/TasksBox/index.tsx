@@ -1,20 +1,21 @@
 import { Task } from "./Task";
 
 import styles from "./styles.module.css";
+import { useState } from "react";
 
 interface Task {
     id: string;
     content: string;
+    isCompleted: boolean;
 }
 
 interface TasksBoxProps {
     tasks: Task[];
-    isComplete: boolean;
-    setIsComplete: (isComplete: boolean) => void;
     setTasks: (tasks: Task[]) => void;
+    onUpdateTaskStatus: (taskId: string) => void;
 }
 
-export function TasksBox({ tasks, isComplete, setIsComplete, setTasks }: TasksBoxProps) {
+export function TasksBox({ tasks, setTasks, onUpdateTaskStatus }: TasksBoxProps) {
 
     function handleDeleteTask(taskId: string) {
         const remainingTasks = tasks.filter(task => task.id !== taskId);
@@ -28,8 +29,8 @@ export function TasksBox({ tasks, isComplete, setIsComplete, setTasks }: TasksBo
                 <Task
                     key={task.id}
                     content={task.content}
-                    isComplete={isComplete}
-                    setIsComplete={setIsComplete}
+                    isCompleted={task.isCompleted}
+                    onUpdateTaskStatus={() => onUpdateTaskStatus(task.id)}
                     onDeleteTask={() => handleDeleteTask(task.id)}
                 />
             ))}
